@@ -1,0 +1,5 @@
+curl -X GET "http://localhost:3030/fetchDealers/Kansas"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   222  100   222    0     0  17083      0 --:--:-- --:--:-- --:--:-- 22200
+[{"_id":"6ae0eab255b9b96f4fe0ebac","id":8,"city":"Topeka","state":"Kansas","address":"288 Larry Place","zip":"66642","lat":"39.0429","long":"-95.7697","short_name":"Bytecard","full_name":"Bytecard Car Dealership","__v":0}]

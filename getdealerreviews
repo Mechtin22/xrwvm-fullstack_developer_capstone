@@ -1,0 +1,5 @@
+curl -X GET "http://localhost:3030/fetchReviews/dealer/1"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100     2  100     2    0     0    127      0 --:--:-- --:--:-- --:--:--   133
+[]
