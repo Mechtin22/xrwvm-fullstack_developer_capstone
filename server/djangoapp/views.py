@@ -6,10 +6,16 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 
+from .models import CarMake, CarModel
+from .populate import initiate
+
 logger = logging.getLogger(__name__)
 
 
+# ============================================================
 # LOGIN VIEW
+# ============================================================
+
 @csrf_exempt
 def login_user(request):
     if request.method != "POST":
@@ -40,7 +46,7 @@ def login_user(request):
             login(request, user)
 
             return JsonResponse({
-                "userName": username,
+                "userName": user.username,
                 "status": "Authenticated"
             })
 
@@ -55,17 +61,38 @@ def login_user(request):
             status=400
         )
 
+    except Exception:
+        logger.exception("Login failed.")
 
+        return JsonResponse(
+            {"error": "Login failed. Please try again."},
+            status=500
+        )
+
+
+# ============================================================
 # LOGOUT VIEW
+# ============================================================
+
 def logout_request(request):
+    if request.method not in ["GET", "POST"]:
+        return JsonResponse(
+            {"error": "Only GET and POST requests are allowed."},
+            status=405
+        )
+
     logout(request)
 
-    data = {"userName": ""}
+    return JsonResponse({
+        "userName": "",
+        "status": "Logged out successfully"
+    })
 
-    return JsonResponse(data)
 
-
+# ============================================================
 # REGISTRATION VIEW
+# ============================================================
+
 @csrf_exempt
 def registration(request):
     if request.method != "POST":
@@ -75,7 +102,6 @@ def registration(request):
         )
 
     try:
-        # Load JSON data from the request body
         data = json.loads(request.body)
 
         username = data.get("userName", "").strip()
@@ -84,28 +110,30 @@ def registration(request):
         last_name = data.get("lastName", "").strip()
         email = data.get("email", "").strip()
 
-        # Validate required fields
-        if not all([username, password, first_name, last_name, email]):
+        if not all([
+            username,
+            password,
+            first_name,
+            last_name,
+            email
+        ]):
             return JsonResponse(
                 {"error": "All fields are required."},
                 status=400
             )
 
-        # Check whether the username already exists
         if User.objects.filter(username=username).exists():
             return JsonResponse({
                 "userName": username,
                 "error": "Already Registered"
             }, status=409)
 
-        # Check whether the email is already registered
         if User.objects.filter(email__iexact=email).exists():
             return JsonResponse({
                 "userName": username,
                 "error": "Email already registered"
             }, status=409)
 
-        # Create a new Django user
         user = User.objects.create_user(
             username=username,
             first_name=first_name,
@@ -114,12 +142,10 @@ def registration(request):
             email=email
         )
 
-        # Log in the newly registered user
         login(request, user)
 
-        # Return the username and authentication status
         return JsonResponse({
-            "userName": username,
+            "userName": user.username,
             "status": "Authenticated"
         }, status=201)
 
@@ -138,10 +164,38 @@ def registration(request):
         )
 
 
-# IMPORTANT:
-# Keep your existing dealership, review, and other views below.
-# Do not delete functions such as:
-# get_dealerships()
-# get_dealer_details()
-# get_dealer_reviews()
-# add_review()
+# ============================================================
+# GET CARS VIEW
+# ============================================================
+
+def get_cars(request):
+    try:
+        # Populate the database if no car makes exist.
+        count = CarMake.objects.count()
+        print(count)
+
+        if count == 0:
+            initiate()
+
+        # Retrieve car models and their related car makes.
+        car_models = CarModel.objects.select_related("car_make")
+
+        cars = []
+
+        for car_model in car_models:
+            cars.append({
+                "CarModel": car_model.name,
+                "CarMake": car_model.car_make.name
+            })
+
+        return JsonResponse({
+            "CarModels": cars
+        })
+
+    except Exception:
+        logger.exception("Error retrieving cars.")
+
+        return JsonResponse(
+            {"error": "Unable to retrieve cars."},
+            status=500
+        )

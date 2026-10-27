@@ -1,25 +1,33 @@
 from django.urls import path
 from djangoapp import views
 
+
 urlpatterns = [
     # Login
     path(
-        route="login",
-        view=views.login_user,
+        "login",
+        views.login_user,
         name="login"
     ),
 
     # Logout
     path(
-        route="logout",
-        view=views.logout_request,
+        "logout",
+        views.logout_request,
         name="logout"
     ),
 
     # Registration
     path(
-        route="register",
-        view=views.registration,
+        "register",
+        views.registration,
         name="register"
+    ),
+
+    # Get all car makes and models
+    path(
+        "get_cars",
+        views.get_cars,
+        name="getcars"
     ),
 ]

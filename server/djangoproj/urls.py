@@ -20,24 +20,31 @@ urlpatterns = [
         name="register_page"
     ),
 
-    # Dealership static pages
-    path(
-        "contact/",
-        TemplateView.as_view(template_name="Contact.html"),
-        name="contact"
-    ),
-
+    # About Us page
     path(
         "about/",
         TemplateView.as_view(template_name="About.html"),
         name="about"
     ),
 
-    # Django admin
-    path("admin/", admin.site.urls),
+    # Contact Us page
+    path(
+        "contact/",
+        TemplateView.as_view(template_name="Contact.html"),
+        name="contact"
+    ),
 
-    # Django API routes
-    path("djangoapp/", include("djangoapp.urls")),
+    # Django admin
+    path(
+        "admin/",
+        admin.site.urls
+    ),
+
+    # Django API endpoints
+    path(
+        "djangoapp/",
+        include("djangoapp.urls")
+    ),
 
     # Home page
     path(

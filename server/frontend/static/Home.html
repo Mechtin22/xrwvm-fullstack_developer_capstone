@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Best Cars Dealership</title>
 
-    <!-- Required stylesheets -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/bootstrap.min.css">
 
@@ -19,6 +23,7 @@
             color: #333;
         }
 
+        /* Navigation bar */
         .navbar {
             background-color: darkturquoise;
             min-height: 85px;
@@ -42,20 +47,40 @@
             color: white !important;
         }
 
+        /* Authentication buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .auth-button,
         .logout-button {
+            display: inline-block;
             background-color: #123047;
             color: white;
             border: none;
             border-radius: 6px;
             padding: 10px 20px;
             font-size: 16px;
+            text-decoration: none;
             cursor: pointer;
+            transition: background-color 0.2s ease;
         }
 
+        .auth-button:hover,
         .logout-button:hover {
             background-color: #176b87;
+            color: white;
         }
 
+        #welcomeUser {
+            color: #123047;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        /* Main hero section */
         .hero {
             width: 90%;
             max-width: 1100px;
@@ -98,6 +123,7 @@
             color: white;
         }
 
+        /* Footer */
         .footer {
             margin-top: 60px;
             padding: 25px;
@@ -106,6 +132,11 @@
             text-align: center;
         }
 
+        .footer p {
+            margin: 8px 0;
+        }
+
+        /* Mobile layout */
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
@@ -114,6 +145,16 @@
             .navbar h2 {
                 font-size: 23px;
                 margin-right: 10px;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+                flex-wrap: wrap;
+            }
+
+            #welcomeUser {
+                display: block;
+                margin: 10px 0;
             }
 
             .hero {
@@ -133,6 +174,7 @@
 
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
+
         <div class="container-fluid">
 
             <h2>Dealerships</h2>
@@ -144,42 +186,84 @@
                 data-bs-target="#navbarText"
                 aria-controls="navbarText"
                 aria-expanded="false"
-                aria-label="Toggle navigation">
-
+                aria-label="Toggle navigation"
+            >
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarText">
+            <div
+                class="collapse navbar-collapse"
+                id="navbarText"
+            >
 
+                <!-- Main navigation -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">
+                        <a
+                            class="nav-link active"
+                            href="/"
+                        >
                             Home
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/about/">
+                        <a
+                            class="nav-link"
+                            href="/about/"
+                        >
                             About Us
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact/">
+                        <a
+                            class="nav-link"
+                            href="/contact/"
+                        >
                             Contact Us
                         </a>
                     </li>
 
                 </ul>
 
-                <!-- Logout button -->
-                <button
-                    type="button"
-                    class="logout-button"
-                    onclick="logoutUser()">
-                    Logout
-                </button>
+                <!-- Login and Register: visible when logged out -->
+                <div
+                    id="authButtons"
+                    class="auth-buttons"
+                >
+                    <a
+                        href="/login/"
+                        class="auth-button"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="/register/"
+                        class="auth-button"
+                    >
+                        Register
+                    </a>
+                </div>
+
+                <!-- Welcome and Logout: visible when logged in -->
+                <div
+                    id="userButtons"
+                    class="auth-buttons"
+                    style="display: none;"
+                >
+                    <span id="welcomeUser"></span>
+
+                    <button
+                        type="button"
+                        id="logoutButton"
+                        class="logout-button"
+                    >
+                        Logout
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -196,11 +280,17 @@
             car with a simple and enjoyable buying experience.
         </p>
 
-        <a class="hero-link" href="/about/">
+        <a
+            class="hero-link"
+            href="/about/"
+        >
             About Us
         </a>
 
-        <a class="hero-link" href="/contact/">
+        <a
+            class="hero-link"
+            href="/contact/"
+        >
             Contact Us
         </a>
 
@@ -208,56 +298,126 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p><strong>Best Cars Dealership</strong></p>
-        <p>Your journey to the right car starts here.</p>
-        <p>&copy; 2026 Best Cars Dealership. All rights reserved.</p>
+
+        <p>
+            <strong>Best Cars Dealership</strong>
+        </p>
+
+        <p>
+            Your journey to the right car starts here.
+        </p>
+
+        <p>
+            &copy; 2026 Best Cars Dealership. All rights reserved.
+        </p>
+
     </footer>
 
     <!-- Bootstrap JavaScript -->
     <script src="/static/bootstrap.bundle.min.js"></script>
 
-    <!-- Logout functionality -->
+    <!-- Authentication and logout functionality -->
     <script>
-        async function logoutUser() {
-            try {
-                // Build logout URL and make GET request
-                let logout_url =
-                    window.location.origin + "/djangoapp/logout";
+        document.addEventListener("DOMContentLoaded", function () {
 
-                const res = await fetch(logout_url, {
-                    method: "GET",
-                    credentials: "same-origin"
-                });
+            const authButtons =
+                document.getElementById("authButtons");
 
-                if (!res.ok) {
-                    alert("The user could not be logged out.");
-                    return;
+            const userButtons =
+                document.getElementById("userButtons");
+
+            const welcomeUser =
+                document.getElementById("welcomeUser");
+
+            const logoutButton =
+                document.getElementById("logoutButton");
+
+
+            /*
+             * Update the navigation based on sessionStorage.
+             */
+            function updateNavigation() {
+
+                const username =
+                    sessionStorage.getItem("username");
+
+                if (username) {
+
+                    // User is logged in
+                    authButtons.style.display = "none";
+                    userButtons.style.display = "flex";
+
+                    welcomeUser.textContent =
+                        "Welcome, " + username;
+
+                } else {
+
+                    // User is logged out
+                    authButtons.style.display = "flex";
+                    userButtons.style.display = "none";
+
+                    welcomeUser.textContent = "";
                 }
+            }
 
-                const json = await res.json();
 
-                if (json) {
-                    // Get the username before clearing session storage
-                    let username =
-                        sessionStorage.getItem("username");
+            /*
+             * Logout the current user.
+             */
+            async function logoutUser() {
 
-                    // Clear session storage
+                logoutButton.disabled = true;
+
+                try {
+
+                    const response = await fetch(
+                        "/djangoapp/logout",
+                        {
+                            method: "GET",
+                            credentials: "same-origin"
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error(
+                            "Logout request failed: HTTP " +
+                            response.status
+                        );
+                    }
+
+                    const data = await response.json();
+
+                    console.log("Logout response:", data);
+
+                    // Clear the locally stored username
                     sessionStorage.removeItem("username");
 
-                    // Notify the user
-                    alert("Logging out " + (username || "user") + "...");
+                    // Refresh the home page and update the navbar
+                    window.location.replace("/");
 
-                    // Return to the home page
-                    window.location.href = window.location.origin;
-                } else {
-                    alert("The user could not be logged out.");
+                } catch (error) {
+
+                    console.error("Logout error:", error);
+
+                    alert(
+                        "Logout failed. Please try again."
+                    );
+
+                    logoutButton.disabled = false;
                 }
-
-            } catch (error) {
-                console.error("Logout failed:", error);
-                alert("An error occurred while logging out.");
             }
-        }
+
+
+            // Attach the logout handler
+            logoutButton.addEventListener(
+                "click",
+                logoutUser
+            );
+
+            // Set the correct navigation on page load
+            updateNavigation();
+
+        });
     </script>
 
 </body>
