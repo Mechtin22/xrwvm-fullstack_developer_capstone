@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,45 +8,41 @@
 
     <title>About Us | Best Cars Dealership</title>
 
-    <!-- Required stylesheets -->
+    <!-- Required CSS files -->
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/bootstrap.min.css">
 
     <style>
         body {
-            margin: 0;
+            background-color: #f4f7f9;
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #f5f7fa;
             color: #333;
+            margin: 0;
         }
 
-        /* Navigation bar */
         .navbar {
             background-color: darkturquoise;
             min-height: 85px;
-            padding: 15px 35px;
+            padding: 15px 30px;
         }
 
         .navbar h2 {
+            color: #123047;
             font-weight: bold;
-            color: #102a43;
-            margin: 0;
-            padding-right: 35px;
+            margin-right: 35px;
         }
 
         .navbar .nav-link {
+            color: #123047 !important;
             font-size: 18px;
-            color: #102a43 !important;
             margin-right: 15px;
-            transition: color 0.3s ease;
         }
 
         .navbar .nav-link:hover,
         .navbar .nav-link.active {
-            color: #ffffff !important;
+            color: white !important;
         }
 
-        /* Main content */
         .about-container {
             width: 90%;
             max-width: 1200px;
@@ -53,19 +50,18 @@
         }
 
         .about-header {
-            background: linear-gradient(135deg, #102a43, #176b87);
+            background: linear-gradient(135deg, #123047, #176b87);
             color: white;
-            text-align: center;
             padding: 45px 30px;
+            text-align: center;
             border-radius: 12px;
             margin-bottom: 45px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
         }
 
         .about-header h1 {
             font-size: 38px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .about-header p {
@@ -78,20 +74,19 @@
         .section-title {
             text-align: center;
             font-size: 30px;
+            color: #123047;
             font-weight: bold;
-            color: #102a43;
             margin-bottom: 12px;
         }
 
         .section-description {
             text-align: center;
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto 35px;
-            color: #667788;
             line-height: 1.7;
+            color: #667788;
         }
 
-        /* Team cards */
         .team-container {
             display: flex;
             flex-wrap: wrap;
@@ -102,37 +97,38 @@
 
         .team-card {
             width: 30%;
-            min-width: 250px;
+            min-width: 260px;
             max-width: 350px;
-            background-color: #ffffff;
+            border: none;
             border-radius: 12px;
             overflow: hidden;
+            background: white;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.09);
+            transition: transform 0.3s ease;
         }
 
         .team-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+            transform: translateY(-6px);
         }
 
         .team-card img {
+            display: block;
             width: 100%;
             height: 260px;
             object-fit: cover;
-            background-color: #e8eef2;
+            object-position: center top;
         }
 
-        .card-body {
-            padding: 25px 20px;
+        .team-card .card-body {
+            padding: 24px 20px;
         }
 
         .team-card .title {
             font-size: 21px;
             font-weight: bold;
-            color: #102a43;
-            margin-bottom: 7px;
+            color: #123047;
+            margin-bottom: 8px;
         }
 
         .team-role {
@@ -144,11 +140,10 @@
         .team-card .card-text {
             color: #667788;
             line-height: 1.7;
-            min-height: 80px;
+            min-height: 105px;
         }
 
         .team-email {
-            display: inline-block;
             color: #176b87;
             text-decoration: none;
             overflow-wrap: anywhere;
@@ -158,40 +153,38 @@
             text-decoration: underline;
         }
 
-        /* About section */
-        .mission-section {
+        .values-section {
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
             margin-bottom: 45px;
         }
 
-        .mission-card {
+        .value-card {
             flex: 1;
             min-width: 250px;
-            background: #ffffff;
             padding: 28px;
-            border-radius: 10px;
+            background: white;
             border-left: 5px solid darkturquoise;
+            border-radius: 8px;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
         }
 
-        .mission-card h3 {
-            color: #102a43;
+        .value-card h3 {
+            color: #123047;
             font-size: 22px;
             margin-bottom: 12px;
         }
 
-        .mission-card p {
+        .value-card p {
             color: #667788;
             line-height: 1.8;
             margin-bottom: 0;
         }
 
-        /* Footer */
         .footer {
-            background-color: #102a43;
-            color: #ffffff;
+            background-color: #123047;
+            color: white;
             text-align: center;
             padding: 25px 15px;
             line-height: 1.8;
@@ -201,15 +194,14 @@
             margin: 5px 0;
         }
 
-        /* Responsive layout */
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
             }
 
             .navbar h2 {
-                padding-right: 10px;
                 font-size: 23px;
+                margin-right: 10px;
             }
 
             .about-container {
@@ -239,7 +231,7 @@
 
 <body>
 
-    <!-- Navigation bar -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
 
@@ -265,79 +257,65 @@
                     </li>
 
                     <li class="nav-item">
-                        <a
-                            class="nav-link active"
-                            aria-current="page"
-                            href="/about">
-                            About Us
-                        </a>
+                        <a class="nav-link active"
+                           aria-current="page"
+                           href="/about">About Us</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">
-                            Contact Us
-                        </a>
+                        <a class="nav-link" href="/contact">Contact Us</a>
                     </li>
 
                 </ul>
             </div>
-
         </div>
     </nav>
 
-    <!-- Main content -->
     <main class="about-container">
 
-        <!-- About header: required assignment content -->
+        <!-- About header -->
         <section class="about-header" name="about-header">
-
             <h1>About Us</h1>
 
             <p>
                 Welcome to Best Cars dealership, home to the best cars in
-                North America. We deal in selling domestic and imported cars
-                at reasonable prices. Our goal is to make buying your next
-                vehicle simple, transparent, and enjoyable.
+                North America. We deal in selling domestic and imported
+                cars at reasonable prices. Our mission is to make finding
+                your next vehicle simple, transparent, and enjoyable.
             </p>
-
         </section>
 
-        <!-- Company mission and values -->
-        <section class="mission-section">
+        <!-- Company information -->
+        <section class="values-section">
 
-            <div class="mission-card">
+            <div class="value-card">
                 <h3>Our Mission</h3>
-
                 <p>
-                    Our mission is to help every customer find a vehicle
-                    that suits their lifestyle, needs, and budget. We aim
-                    to provide a smooth buying experience through helpful
-                    guidance and dependable customer service.
+                    We help customers find vehicles that match their
+                    lifestyles, preferences, and budgets. Our team is
+                    committed to providing helpful guidance and dependable
+                    service throughout the buying process.
                 </p>
             </div>
 
-            <div class="mission-card">
+            <div class="value-card">
                 <h3>Why Choose Us?</h3>
-
                 <p>
-                    We offer a selection of domestic and imported vehicles,
-                    clear information about available cars, and assistance
-                    throughout the purchasing process. Customer satisfaction
-                    and trust are at the heart of our service.
+                    From exploring available models to comparing features,
+                    we aim to provide a straightforward car-buying experience
+                    built on transparency, quality, and customer satisfaction.
                 </p>
             </div>
 
         </section>
 
-        <!-- Team section -->
+        <!-- Team -->
         <section>
-
             <h2 class="section-title">Meet Our Team</h2>
 
             <p class="section-description">
-                Our team is here to help you explore your options, understand
-                vehicle features, and make a confident decision when choosing
-                your next car.
+                Meet the professionals dedicated to helping you find the
+                right vehicle and enjoy a smooth dealership experience.
             </p>
 
             <div class="team-container">
@@ -348,27 +326,25 @@
                     <img
                         class="card-img-top"
                         src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80"
-                        alt="Portrait of the dealership manager"
+                        alt="Professional business manager"
                         loading="lazy">
 
                     <div class="card-body">
-
                         <p class="title">Michael Anderson</p>
 
                         <p class="team-role">Dealership Manager</p>
 
                         <p class="card-text">
-                            Michael oversees daily dealership operations
-                            and works to ensure that customers receive
-                            professional, reliable service throughout
-                            their car-buying journey.
+                            Michael oversees dealership operations and
+                            ensures that customers receive professional
+                            assistance. He focuses on maintaining service
+                            quality and building lasting customer relationships.
                         </p>
 
                         <a class="team-email"
                            href="mailto:michael@example.com">
                             michael@example.com
                         </a>
-
                     </div>
                 </div>
 
@@ -378,27 +354,25 @@
                     <img
                         class="card-img-top"
                         src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80"
-                        alt="Portrait of a customer relations specialist"
+                        alt="Professional customer relations specialist"
                         loading="lazy">
 
                     <div class="card-body">
-
                         <p class="title">Sarah Mitchell</p>
 
                         <p class="team-role">Customer Relations Specialist</p>
 
                         <p class="card-text">
-                            Sarah helps customers understand available
-                            vehicles, answers their questions, and guides
-                            them through the different stages of the
-                            purchasing process.
+                            Sarah answers customer questions, explains
+                            available vehicle options, and guides buyers
+                            through the purchasing process with clear
+                            communication and attentive service.
                         </p>
 
                         <a class="team-email"
                            href="mailto:sarah@example.com">
                             sarah@example.com
                         </a>
-
                     </div>
                 </div>
 
@@ -408,26 +382,25 @@
                     <img
                         class="card-img-top"
                         src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=80"
-                        alt="Portrait of a vehicle sales consultant"
+                        alt="Professional vehicle sales consultant"
                         loading="lazy">
 
                     <div class="card-body">
-
                         <p class="title">David Thompson</p>
 
                         <p class="team-role">Vehicle Sales Consultant</p>
 
                         <p class="card-text">
-                            David assists customers in comparing models,
-                            exploring vehicle features, and finding a car
-                            that matches their preferences and budget.
+                            David helps customers compare vehicle models,
+                            understand important features, and explore
+                            suitable options based on their requirements
+                            and budgets.
                         </p>
 
                         <a class="team-email"
                            href="mailto:david@example.com">
                             david@example.com
                         </a>
-
                     </div>
                 </div>
 
@@ -438,17 +411,14 @@
 
     <!-- Footer -->
     <footer class="footer">
-
         <p><strong>Best Cars Dealership</strong></p>
-
         <p>Your journey to the right car starts here.</p>
-
         <p>&copy; 2026 Best Cars Dealership. All rights reserved.</p>
-
     </footer>
 
-    <!-- Bootstrap JavaScript for the responsive navigation menu -->
+    <!-- Bootstrap JavaScript for responsive navigation -->
     <script src="/static/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
+```
